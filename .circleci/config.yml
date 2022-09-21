@@ -58,20 +58,24 @@ jobs:
 
         - deploy: 
             name: deploy reverse proxy
-            command : 
+            command : |
+              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin 
               docker push rgues2021/udagram-reverseproxy:v1
 
         - deploy: 
             name: deploy user service image
-            command : 
+            command : |
+              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin 
               docker push rgues2021/udagram-api-user:v1
 
         - deploy: 
             name: deploy feed service image
-            command : 
+            command : |
+              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin 
               docker push rgues2021/udagram-api-feed:v1
 
         - deploy: 
             name: deploy frontend app image
-            command : 
+            command : |
+              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin  
               docker push rgues2021/udagram-frontend:v1
