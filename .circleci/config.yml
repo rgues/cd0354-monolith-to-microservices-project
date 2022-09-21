@@ -36,26 +36,42 @@ jobs:
             command: |
               docker build -t udagram-frontend ./udagram-frontend
 
-        - deploy: 
-            name: deploy reverse proxy
-            command : 
-              docker tag udagram-reverseproxy:latest rgues2021/udagram-reverseproxy:v1
-              docker push rgues2021/udagram-reverseproxy:v1
+        - run: 
+            name: create tag reverse proxy
+            command: |
+              docker tag udagram-reverseproxy:latest rgues2021/udagram-reverseproxy:v1   
+
+        - run: 
+            name: create tag user service
+            command: |
+              docker tag udagram-api-user:latest rgues2021/udagram-api-user:v1  
+
+        - run: 
+            name: create tag feed service
+            command: |
+              docker tag udagram-api-feed:latest rgues2021/udagram-api-feed:v1  
+
+        - run: 
+            name: create tag frontend app
+            command: |
+                    docker tag udagram-frontend:latest rgues2021/udagram-frontend:v1
 
         - deploy: 
             name: deploy reverse proxy
             command : 
-              docker tag udagram-api-user:latest rgues2021/udagram-api-user:v1
+              docker push rgues2021/udagram-reverseproxy:v1
+
+        - deploy: 
+            name: deploy user service image
+            command : 
               docker push rgues2021/udagram-api-user:v1
 
         - deploy: 
             name: deploy feed service image
             command : 
-              docker tag udagram-api-feed:latest rgues2021/udagram-api-feed:v1
               docker push rgues2021/udagram-api-feed:v1
 
         - deploy: 
             name: deploy frontend app image
             command : 
-              docker tag udagram-frontend:latest rgues2021/udagram-frontend:v1
               docker push rgues2021/udagram-frontend:v1
