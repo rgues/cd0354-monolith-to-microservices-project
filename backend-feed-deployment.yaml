@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-feed
-        image: rgues2021/udagram-api-feed:v2
+        image: rgues2021/udagram-api-feed:v1
         imagePullPolicy: Always
         env:
           - name: POSTGRES_USERNAME
@@ -61,12 +61,17 @@ spec:
               configMapKeyRef:
                 name: env-configmap
                 key: JWT_SECRET  
+          - name: URL
+            valueFrom:
+              configMapKeyRef:
+                name: env-configmap
+                key: URL 
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
+            memory: "2048Mi"
+            cpu: "300m"
           limits:
-            memory: "1024Mi"
+            memory: "4096Mi"
             cpu: "500m"
         ports:
         - containerPort: 8080

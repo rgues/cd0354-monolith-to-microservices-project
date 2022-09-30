@@ -11,4 +11,4 @@ spec:
     protocol: TCP
   selector:
     run: backend-feed
-  type: ClusterIP 
+type: ClusterIP 

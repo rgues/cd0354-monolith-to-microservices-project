@@ -11,4 +11,4 @@ spec:
     protocol: TCP
   selector:
     run: reverseproxy
-  type: LoadBalancer
+type: LoadBalancer
