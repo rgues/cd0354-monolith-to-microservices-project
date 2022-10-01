@@ -68,11 +68,11 @@ spec:
                 key: URL 
         resources:
           requests:
-            memory: "2048Mi"
-            cpu: "300m"
+            memory: "512Mi"
+            cpu: "250m"
           limits:
-            memory: "4096Mi"
-            cpu: "500m"
+            memory: "1024Mi"
+            cpu: "300m"
         ports:
         - containerPort: 8080
       restartPolicy: Always
