@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-user
-        image: rgues2021/udagram-api-user:v1
-        imagePullPolicy: Always
+        image: rgues2021/udagram-api-user:v2
         env:
           - name: POSTGRES_USERNAME
             valueFrom:
@@ -65,7 +64,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: env-configmap
-                key: URL        
+                key: URL  
         resources:
           requests:
             memory: "512Mi"
@@ -75,4 +74,13 @@ spec:
             cpu: "300m"
         ports:
         - containerPort: 8080
-      restartPolicy: Always
+        volumeMounts:
+          - name: awssecret
+            mountPath: "/root/.aws/"
+            readOnly: true
+      volumes:
+        - name: awssecret
+          configMap:
+            name: aws-secret
+            optional: false
+    
